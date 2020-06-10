@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
-from django.views.generic import DetailView, RedirectView, UpdateView
+from django.views.generic import DetailView, RedirectView, UpdateView, TemplateView
 
 User = get_user_model()
 
@@ -48,3 +48,12 @@ class UserRedirectView(LoginRequiredMixin, RedirectView):
 
 
 user_redirect_view = UserRedirectView.as_view()
+
+
+class ProfileView(TemplateView):
+
+    def get(self,request):
+        
+        return render(request,'users/profile.html')
+
+profile_view = ProfileView.as_view()

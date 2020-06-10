@@ -1,7 +1,7 @@
 Real Trends Test
 ================
 
-Real Trends Mercadolibre - Test tÃ©cnico
+Real Trends Mercadolibre - Test t�cnico
 
 
 :License: MIT

@@ -20,7 +20,7 @@ Setting Up Your Admin account
 
 * To create an **superuser account**, use this command::
 
-    $ python manage.py createsuperuser
+    $ docker-compose -f local.yml run --rm python manage.py createsuperuser
 
 Type checks
 ^^^^^^^^^^^
@@ -29,27 +29,31 @@ Running type checks with mypy:
 
 ::
 
-  $ mypy rtmeli
+  $ docker-compose -f local.yml run --rm django mypy rtmeli
 
 Test coverage
 ^^^^^^^^^^^^^
 
 To run the tests, check your test coverage, and generate an HTML coverage report::
 
-    $ coverage run -m pytest
-    $ coverage html
+    $ docker-compose -f local.yml run --rm django coverage run -m pytest
+    $ docker-compose -f local.yml run --rm django coverage html
     $ open htmlcov/index.html
 
-Running tests with py.test
+Running tests with py.test in docker
 ~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
 
-  $ pytest
+  $ docker-compose -f local.yml run --rm django pytest
 
 
 Deployment - Heroku
 ^^^^^^
 
+::
+
+  $ heroku login
+  $ git push heroku
 
 

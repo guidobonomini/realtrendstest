@@ -43,6 +43,6 @@ class AuthorizeView(TemplateView):
             authorize(request.GET.get('code'))
         request.session['access_token'] = get_access_token()
         request.session.modified = True
-        return HttpResponseRedirect(reverse('users:profile'))
+        return HttpResponseRedirect(reverse('home'))
 
 authorize_view = AuthorizeView.as_view()

@@ -8,7 +8,8 @@ from django.conf import settings
 from ..api.services import MercadolibreApi
 
 from accounts.services import (
-    get_auth_url, 
+    get_auth_url,
+    get_access_token
 )
 
 from utils.decorators import login_required

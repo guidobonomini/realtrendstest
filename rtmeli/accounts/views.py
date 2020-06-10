@@ -3,6 +3,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, RedirectView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.conf import settings
 
 from ..api.services import MercadolibreApi
 
@@ -40,7 +41,7 @@ class AuthorizeView(TemplateView):
     def get(self,request):
         meli = MercadolibreApi()
         if(request.GET.get('code')):
-            meli.meli.authorize(request.GET.get('code'))
+            meli.meli.authorize(request.GET.get('code'), settings.REDIRECT_URL)
         request.session['access_token'] = meli.meli.get_access_token()
         request.session.modified = True
         return HttpResponseRedirect(reverse('home'))

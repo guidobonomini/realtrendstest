@@ -1,6 +1,4 @@
 import json
-import sys
-sys.path.append('../lib')
 from django.conf import settings
 from lib.meli import Meli
 

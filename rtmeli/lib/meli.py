@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 from configparser import ConfigParser as SafeConfigParser
-from ssl_helper import SSLAdapter
+from .ssl_helper import SSLAdapter
 from urllib.parse import urlencode
 import json
 import os

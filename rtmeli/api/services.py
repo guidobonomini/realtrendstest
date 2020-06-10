@@ -1,20 +1,20 @@
 import json
 import requests
 from django.conf import settings
-from lib.meli import Meli
+from lib.meli_sdk.meli import Meli
 
 class MercadolibreApi():
     def __init__(self, *args, **kwargs):
         self.meli = Meli(
             client_id=settings.MERCADOLIBRE_CLIENT_ID, 
             client_secret=settings.MERCADOLIBRE_CLIENT_SECRET, 
-            access_token=kwargs.pop('access_token', None),
-            refresh_token=kwargs.pop('refresh_token', None)
+            access_token=kwargs.get('access_token', None),
+            refresh_token=kwargs.get('refresh_token', None)
         )
-        self.category = kwargs.pop('category', None)
-        self.sort = kwargs.pop('sort','')
-        self.limit = kwargs.pop('limit',50)
-        self.offset = kwargs.pop('offset',0)
+        self.category = kwargs.get('category', None)
+        self.sort = kwargs.get('sort','')
+        self.limit = kwargs.get('limit',50)
+        self.offset = kwargs.get('offset',0)
         self.profile_url = self.meli.API_ROOT_URL + '/users/me'
 
     def get_category(self):
@@ -25,8 +25,7 @@ class MercadolibreApi():
         params = {
             'category':self.category, 
             'limit':self.limit, 
-            'offset':self.offset,
-            'sort':self.sort
+            'offset':self.offset
         }
         response = self.meli.get(path="/sites/MLA/search", params=params)
         return json.loads(response.content)['results']

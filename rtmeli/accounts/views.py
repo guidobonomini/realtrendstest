@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -10,6 +11,8 @@ from accounts.services import (
     get_access_token
 )
 
+from utils.decorators import login_required
+
 class LoginView(TemplateView):
     def get(self,request):
         auth_url = get_auth_url()
@@ -18,6 +21,7 @@ class LoginView(TemplateView):
 login_view = LoginView.as_view()
 
 class LogoutView(TemplateView):
+    @method_decorator(login_required())
     def get(self,request):
         return render(request,'account/logout.html')
 

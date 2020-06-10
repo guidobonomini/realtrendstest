@@ -8,8 +8,7 @@ def get_auth_url():
     return meli.get_auth_url()
 
 #TODO: Utilizar metodos de la MercadolibreApi y remover setting
-def get_access_token():
+def get_access_token(code):
     meli = MercadolibreApi()
-    if(request.GET.get('code')):
-        meli.authorize(request.GET.get('code'), settings.REDIRECT_URL)
+    meli.authorize(code, settings.REDIRECT_URL)
     return meli.get_access_token()

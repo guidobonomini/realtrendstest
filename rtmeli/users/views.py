@@ -5,6 +5,9 @@ from django.urls import reverse
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, RedirectView, UpdateView, TemplateView
 
+from users.services import get_profile_from_meli
+
+
 User = get_user_model()
 
 
@@ -53,7 +56,7 @@ user_redirect_view = UserRedirectView.as_view()
 class ProfileView(TemplateView):
 
     def get(self,request):
-        
+        get_profile_from_meli(request.session['access_token'])
         return render(request,'users/profile.html')
 
 profile_view = ProfileView.as_view()

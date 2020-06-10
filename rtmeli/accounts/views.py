@@ -39,10 +39,9 @@ signout_view = SignoutView.as_view()
 
 class AuthorizeView(TemplateView):
     def get(self,request):
-        meli = MercadolibreApi()
         if(request.GET.get('code')):
-            meli.meli.authorize(request.GET.get('code'), settings.REDIRECT_URL)
-        request.session['access_token'] = meli.meli.access_token
+            token = get_access_token(request.GET.get('code'))
+        request.session['access_token'] = token
         request.session.modified = True
         return HttpResponseRedirect(reverse('home'))
 

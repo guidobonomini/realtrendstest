@@ -10,5 +10,5 @@ app_name = "accounts"
 urlpatterns = [
     path("login/", view=login_view, name="login"),
     path("logout/", view=logout_view, name="logout"),
-    path("authorize/", view=authorize_view, name="authorize"),
+    path("authorize", view=authorize_view, name="authorize"),
 ]

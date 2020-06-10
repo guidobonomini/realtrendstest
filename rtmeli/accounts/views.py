@@ -9,7 +9,6 @@ from accounts.services import (
 class LoginView(TemplateView):
     def get(self,request):
         auth_url = get_auth_url()
-        print(auth_url)
         return render(request,'account/login.html',{'auth_url':auth_url})
 
 login_view = LoginView.as_view()

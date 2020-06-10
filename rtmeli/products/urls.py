@@ -7,6 +7,6 @@ from rtmeli.products.views import (
 
 app_name = "products"
 urlpatterns = [
-    path("~top_prices/", view=top_prices_view, name="top_prices"),
-    path("~top_sellers/", view=top_sellers_view, name="top_sellers"),
+    path("top_prices/", view=top_prices_view, name="top_prices"),
+    path("top_sellers/", view=top_sellers_view, name="top_sellers"),
 ]

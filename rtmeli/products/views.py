@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
 
-from products.services import (
+from .services import (
     get_category_items_count,
     get_most_sold_seller_ids,
     get_top_items_by_price,
-    get_user_nickname
+    get_users_nicknames
 )
 
 class TopSellersView(TemplateView):
@@ -13,7 +13,7 @@ class TopSellersView(TemplateView):
         category_id = "MLA420040"
         total_items_category = get_category_items_count(category_id)
         seller_ids = get_most_sold_seller_ids(category_id, total_items_category)
-        sellers = get_user_nickname(seller_ids)
+        sellers = get_users_nicknames(seller_ids)
         return render(request,'pages/topsellers.html',{'items':sellers})
 
 top_sellers_view = TopSellersView.as_view()

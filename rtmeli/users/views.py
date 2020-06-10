@@ -7,8 +7,8 @@ from django.utils.decorators import method_decorator
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import DetailView, RedirectView, UpdateView, TemplateView
 
-from users.services import get_profile_from_meli
-from utils.decorators import login_required
+from .services import get_profile_from_meli
+from ..utils.decorators import login_required
 
 User = get_user_model()
 

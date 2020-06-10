@@ -4,11 +4,10 @@ from django.views.generic import TemplateView, RedirectView
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from ..api.services import MercadolibreApi
 
 from accounts.services import (
     get_auth_url, 
-    authorize, 
-    get_access_token
 )
 
 from utils.decorators import login_required
@@ -39,9 +38,10 @@ signout_view = SignoutView.as_view()
 
 class AuthorizeView(TemplateView):
     def get(self,request):
+        meli = MercadolibreApi()
         if(request.GET.get('code')):
-            authorize(request.GET.get('code'))
-        request.session['access_token'] = get_access_token()
+            meli.meli.authorize(request.GET.get('code'))
+        request.session['access_token'] = meli.meli.get_access_token()
         request.session.modified = True
         return HttpResponseRedirect(reverse('home'))
 

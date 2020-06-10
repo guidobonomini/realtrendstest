@@ -1,7 +1,7 @@
 import json
 from django.conf import settings
 
-from products.utils import find_most_sold, process_threads, rearrange_dictionary
+from products.utils import find_most_sold, process_threads, rearrange_dictionary, process_threads_users
 from api.services import MercadolibreApi
 
 def get_category_items_count(category_id):
@@ -26,15 +26,23 @@ def get_most_sold_seller_ids(category_id, total_items, limit=50, offset=0):
         total_items=total_items, limit=limit, nthreads=nthreads
     )
     most_sold = find_most_sold(items, 10)
-    print(most_sold)
     sellers_ids = rearrange_dictionary(most_sold)
+    print(sellers_ids)
     return sellers_ids
 
 def get_user_nickname(users):
     meli = MercadolibreApi()
-    return [meli.get_user_information(user) for user in users]
+    items = process_threads_users(
+        process_request_users, users=users
+    )
+    return items
 
 def process_request(category, limit, offset, items):
     meli = MercadolibreApi(category=category, limit=limit, offset=offset)
     items.extend(meli.get_items_by_category())
+    return items
+
+def process_request_users(user, items):
+    meli = MercadolibreApi()
+    items[user['position']] = (meli.get_user_information(user['id']))
     return items

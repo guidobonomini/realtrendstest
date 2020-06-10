@@ -9,7 +9,7 @@ def find_most_sold(items, range):
     return most_sold[:range]
 
 def rearrange_dictionary(items):
-    return [item[0] for item in items]
+    return [{'id': item[0],'position': idx} for idx, item in enumerate(items)]
 
 def process_threads(function, **params):
     items = []
@@ -20,6 +20,20 @@ def process_threads(function, **params):
             params.get('category'),
             params.get('limit'),
             offset,
+            items
+            )
+        )
+        threads.append(t)
+    [ t.start() for t in threads ]
+    [ t.join() for t in threads ]
+    return items
+
+def process_threads_users(function, users):
+    items = [0]*len(users)
+    threads = []
+    for i in range(len(users)):
+        t = Thread(target=function, args=(
+            users[i],
             items
             )
         )

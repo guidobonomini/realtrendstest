@@ -1,7 +1,7 @@
 import json
 import requests
 from django.conf import settings
-from ..lib.meli_sdk.meli import Meli
+from .meli_sdk.meli import Meli
 
 class MercadolibreApi():
     def __init__(self, *args, **kwargs):

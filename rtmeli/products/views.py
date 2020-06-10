@@ -3,16 +3,18 @@ from django.views.generic import TemplateView
 
 from products.services import (
     get_category_items_count,
-    get_category_items,
-    get_top_items_by_price
+    get_most_sold_seller_ids,
+    get_top_items_by_price,
+    get_user_nickname
 )
 
 class TopSellersView(TemplateView):
     def get(self,request):
         category_id = "MLA420040"
         total_items_category = get_category_items_count(category_id)
-        items_list = get_category_items(category_id, total_items_category)
-        return render(request,'pages/topsellers.html',{'items':items_list})
+        seller_ids = get_most_sold_seller_ids(category_id, total_items_category)
+        sellers = get_user_nickname(seller_ids)
+        return render(request,'pages/topsellers.html',{'items':sellers})
 
 top_sellers_view = TopSellersView.as_view()
 

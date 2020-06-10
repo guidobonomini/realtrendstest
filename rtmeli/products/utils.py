@@ -8,6 +8,9 @@ def find_most_sold(items, range):
     most_sold = sorted(most_sold.items(), key=lambda items: items[1], reverse=True)
     return most_sold[:range]
 
+def rearrange_dictionary(items):
+    return [item[0] for item in items]
+
 def process_threads(function, **params):
     items = []
     threads = []

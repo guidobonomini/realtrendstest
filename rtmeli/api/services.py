@@ -25,10 +25,15 @@ class MercadolibreApi():
         params = {
             'category':self.category, 
             'limit':self.limit, 
-            'offset':self.offset
+            'offset':self.offset,
+            'sort':self.sort
         }
         response = self.meli.get(path="/sites/MLA/search", params=params)
         return json.loads(response.content)['results']
+
+    def get_user_information(self, user_id):
+        response = self.meli.get(path=("/users/%s" % user_id))
+        return json.loads(response.content)
 
     def get_auth_url(self):
         return self.meli.auth_url(redirect_URI=settings.REDIRECT_URL)

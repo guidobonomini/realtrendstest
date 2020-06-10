@@ -1,2 +1,15 @@
 {% extends "base.html" %}
+{% load static %}
+{% load i18n %}
 
+{% block content %}
+<ul class="list-group">
+    {% for item in items %}
+    <li class="list-group-item">
+        <h2>{{item.title}}</h2>
+        <h4>Precio: {{item.price}}</h4>
+        <a href="{{item.link}}">{{item.link}}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}

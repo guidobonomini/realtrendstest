@@ -20,7 +20,7 @@ class ProductsiTest(unittest.TestCase):
 
     #requests tests
     def testGetItemsByCategory(self):
-        response = self.get_category_items(
+        response = self.get_most_sold_seller_ids(
             category_id=self.category, 
             total_items=self.total_items, 
             limit=self.limit, 

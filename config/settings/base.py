@@ -55,6 +55,8 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "rtmeli.users.apps.UsersConfig",
+    "rtmeli.products.apps.ProductsConfig",
+    "rtmeli.accounts.apps.AccountsConfig"
 ]
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 

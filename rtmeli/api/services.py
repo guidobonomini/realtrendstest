@@ -15,7 +15,7 @@ class MercadolibreApi():
         self.sort = kwargs.pop('sort','')
         self.limit = kwargs.pop('limit',50)
         self.offset = kwargs.pop('offset',0)
-        self.profile_url = self.meli.API_ROOT_URL + 'users/me?access_token='
+        self.profile_url = self.meli.API_ROOT_URL + '/users/me'
 
     def get_category(self):
         response = self.meli.get(path=("/categories/%s" % self.category))

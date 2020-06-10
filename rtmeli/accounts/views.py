@@ -42,7 +42,7 @@ class AuthorizeView(TemplateView):
         meli = MercadolibreApi()
         if(request.GET.get('code')):
             meli.meli.authorize(request.GET.get('code'), settings.REDIRECT_URL)
-        request.session['access_token'] = meli.meli.get_access_token()
+        request.session['access_token'] = meli.meli.access_token
         request.session.modified = True
         return HttpResponseRedirect(reverse('home'))
 

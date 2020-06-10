@@ -24,7 +24,7 @@ logout_view = LogoutView.as_view()
 class AuthorizeView(TemplateView):
     def get(self,request):
         if(request.GET.get('code')):
-            authorize(request.query.get('code'))
+            authorize((request.GET.get('code'))
         access_token = get_access_token()
         request.session['access_token'] = access_token
         return HttpResponseRedirect('users:profile')

@@ -2,7 +2,7 @@ import json
 import sys
 sys.path.append('../lib')
 from django.conf import settings
-from meli import Meli
+from lib.meli import Meli
 
 meli = Meli(client_id=settings.MERCADOLIBRE_CLIENT_ID, client_secret=settings.MERCADOLIBRE_CLIENT_SECRET)
 

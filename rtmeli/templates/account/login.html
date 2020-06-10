@@ -1,0 +1,17 @@
+{% extends "account/base.html" %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+{% block inner %}
+
+<form class="form-signin" action="{{auth_url}}">
+  <img class="mb-4" src="https://assets.entrepreneur.com/images/misc/1584487204_LOGOCODOS_fondoblanco-01.png?width=1000" alt="" width="300" height="300">
+  <button class="btn btn-lg btn-primary btn-block" type="submit">{% trans "Sign In" %}</button>
+  <p class="mt-5 mb-3 text-muted">&copy; 2020 - Guido Bonomini</p>
+</form>
+
+{% endblock %}
+

@@ -11,6 +11,8 @@ from .services import (
 class TopSellersView(TemplateView):
     def get(self,request):
         category_id = "MLA420040"
+        if (request.session['access_token']):
+            token = request.session['access_token']
         total_items_category = get_category_items_count(category_id)
         seller_ids = get_most_sold_seller_ids(category_id, total_items_category)
         sellers = get_users_nicknames(seller_ids)

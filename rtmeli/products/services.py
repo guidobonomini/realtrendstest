@@ -1,20 +1,11 @@
 import json
 from django.conf import settings
-from lib.meli import Meli
+from api.services import MercadolibreApi
 
-
-meli = Meli(client_id=settings.MERCADOLIBRE_CLIENT_ID, client_secret=settings.MERCADOLIBRE_CLIENT_SECRET)
-
-def get_category(category_id):
-    response = meli.get(path=("/categories/%s" % category_id))
-    return json.loads(response.content)
+def get_category_items_count(category_id):
+    meli = MercadolibreApi(category=category_id)
+    return meli.get_category()['total_items_in_this_category']
 
 def get_items_by_category(category_id, limit=50, offset=0, sort=''):
-    params = {
-        'category':category_id, 
-        'limit':limit, 
-        'offset':offset,
-        'sort':sort
-    }
-    response = meli.get(path="/sites/MLA/search", params=params)
-    return json.loads(response.content)['results']
+    meli = MercadolibreApi(category=category_id, limit=limit, offset=offset, sort=sort)
+    return meli.get_items_by_category()

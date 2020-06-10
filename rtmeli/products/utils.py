@@ -2,7 +2,7 @@ from collections import defaultdict
 from itertools import islice
 from threading import Thread
 
-from products.services import get_items_by_category, get_category
+from products.services import get_items_by_category
 
 
 def get_top_items_by_price(category_id, limit, sort):
@@ -15,16 +15,20 @@ def get_top_items_by_price(category_id, limit, sort):
         }
         for item in items]
 
-def get_category_items_count(category_id):
-    category = get_category(category_id)
-    return category['total_items_in_this_category']
+def process_request(category_id, limit, offset, items):
+    items.extend(get_items_by_category(category_id, limit, offset))
+    return items
 
 def get_category_items(category_id, total_items, limit=50):
-    loops = total_items // limit + (1 if (total_items % limit > 0) else 0)
+    nthreads = total_items // limit + (1 if (total_items % limit > 0) else 0)
     items = []
-    for i in range(loops):
+    threads = []
+    for i in range(nthreads):
         offset = limit * i
-        items.extend(get_items_by_category(category_id, limit, offset))
+        t = Thread(target=process_request, args=(category_id, limit, offset, items))
+        threads.append(t)
+    [ t.start() for t in threads ]
+    [ t.join() for t in threads ]
     most_sold = find_most_sold(items)
     return most_sold
 

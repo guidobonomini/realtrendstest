@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
+from django.http import HttpResponseRedirect
+
 from accounts.services import (
     get_auth_url, 
     authorize, 
@@ -21,8 +23,11 @@ logout_view = LogoutView.as_view()
 
 class AuthorizeView(TemplateView):
     def get(self,request):
-        if(request.query.get('code')):
+        if(request.GET.get('code')):
             authorize(request.query.get('code'))
-        return get_access_token()
+        access_token = get_access_token()
+        request.session['access_token'] = access_token
+        return HttpResponseRedirect('users:profile')
+
 
 authorize_view = AuthorizeView.as_view()

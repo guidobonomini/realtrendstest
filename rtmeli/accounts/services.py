@@ -1,14 +1,13 @@
-import json
-from django.conf import settings
-from lib.meli import Meli
-
-meli = Meli(client_id=settings.MERCADOLIBRE_CLIENT_ID, client_secret=settings.MERCADOLIBRE_CLIENT_SECRET)
+from api.services import MercadolibreApi
 
 def get_auth_url():
-    return meli.auth_url(redirect_URI=settings.REDIRECT_URL)
+    meli = MercadolibreApi()
+    return meli.get_auth_url()
 
 def authorize(code):
-    return meli.authorize(code, settings.REDIRECT_URL)
+    meli = MercadolibreApi()
+    return meli.authorize(code)
 
 def get_access_token():
-    return meli.access_token
+    meli = MercadolibreApi()
+    return meli.get_access_token()

@@ -2,9 +2,11 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 
 from products.utils import (
-    get_category_items, get_category_items_count, 
+    get_category_items, 
     get_top_items_by_price
 )
+
+from products.services import get_category_items_count
 
 class TopSellersView(TemplateView):
     def get(self,request):

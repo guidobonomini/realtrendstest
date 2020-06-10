@@ -44,6 +44,6 @@ class MercadolibreApi():
         url = self.profile_url
         response = requests.get(
             url,
-            params={'access_token': self.access_token},
+            params={'access_token': self.meli.access_token},
         )
         return response.content

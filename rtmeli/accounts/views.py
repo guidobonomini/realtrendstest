@@ -26,6 +26,6 @@ class AuthorizeView(TemplateView):
         if(request.GET.get('code')):
             authorize(request.GET.get('code'))
         request.session['access_token'] = get_access_token()
-        return HttpResponseRedirect('users:profile')
+        return HttpResponseRedirect(reverse('users:profile'))
 
 authorize_view = AuthorizeView.as_view()

@@ -1,5 +1,5 @@
 from django.core.exceptions import ObjectDoesNotExist
-from django.http import HttpResponseRedirect
+from django.shortcuts import render
 
 def login_required():
     def _dec(view_func):
